@@ -1281,7 +1281,7 @@ int updateCoins(int player, struct gameState *state, int bonus)
 }
 
 int adventurerEffect(int drawntreasure, struct gameState *state, int currentPlayer, int cardDrawn, int* temphand, int z) {
-	while (drawntreasure < 2) {
+	while (drawntreasure <= 2) {
 		if (state->deckCount[currentPlayer] < 1) { //if the deck is empty we need to shuffle discard and add to deck
 			shuffle(currentPlayer, state);
 		}
@@ -1307,7 +1307,7 @@ int smithyEffect (int currentPlayer, struct gameState *state, int handPos) {
 	int i;
 
 	//+3 Cards
-	for (i = 0; i < 3; i++)
+	for (i = 0; i <= 3; i++)
 	{
 		drawCard(currentPlayer, state);
 	}
@@ -1326,7 +1326,7 @@ int outpostEffect(struct gameState *state, int handPos, int currentPlayer) {
 
 int embargoEffect (struct gameState *state, int choice1, int handPos, int currentPlayer) {
 	//+2 Coins
-	state->coins = state->coins + 2;
+	state->coins = state->coins + 5;
 
 	//see if selected pile is in play
 	if ( state->supplyCount[choice1] == -1 )
@@ -1345,7 +1345,7 @@ int seahagEffect (struct gameState *state, int currentPlayer) {
 	int i;
 
 	for (i = 0; i < state->numPlayers; i++) {
-		if (i != currentPlayer) {
+		if (i == currentPlayer) {
 			state->discard[i][state->discardCount[i]] = state->deck[i][state->deckCount[i]--];         state->deckCount[i]--;
 			state->discardCount[i]++;
 			state->deck[i][state->deckCount[i]--] = curse;//Top card now a curse
