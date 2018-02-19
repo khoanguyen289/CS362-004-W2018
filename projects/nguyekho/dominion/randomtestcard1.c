@@ -83,25 +83,26 @@ int main() {
   }
 
   // results
+      
   printf ("Test Case 1: Player has enough cards on deck\n");
   printf("Test 1a - cardEffect() correctly returns 0. Success: %d, Failure: %d\n", test_1a_success, test_1a_failure);
-  printf("Test 1b - cardEffect() correctly increases handCount of the player by 1 (drawn 2 cards and discarded adventurer). Success: %d, Failure: %d\n", test_1b_success, test_1b_failure);
-  printf("Test 1c - cardEffect() correctly places adventurer into the played pile. Success: %d, Failure: %d\n", test_1c_success, test_1c_failure);
+  printf("Test 1b - cardEffect() correctly increases handCount of the player by 2 (drawn 3 cards and discarded smithy). Success: %d, Failure: %d\n", test_1b_success, test_1b_failure);
+  printf("Test 1c - cardEffect() correctly places smithy into the played pile. Success: %d, Failure: %d\n", test_1c_success, test_1c_failure);
   printf("Test 1d - cardEffect() correctly increases playedCardCount by 1. Success: %d, Failure: %d\n", test_1d_success, test_1d_failure);
-  printf("Test 1e - cardEffect() correctly decreases player's deckCount by 2. Success: %d, Failure: %d\n", test_1e_success, test_1e_failure);
+  printf("Test 1e - cardEffect() correctly decreases player's deckCount by 3. Success: %d, Failure: %d\n", test_1e_success, test_1e_failure);
   printf("Test 1f - cardEffect() does not change other players' handCount and deckCount. Success: %d, Failure: %d\n", test_1f_success, test_1f_failure);
-  printf("Test 1g - cardEffect() correctly gives player 2 treasures card in hand. Success: %d, Failure: %d\n", test_1g_success, test_1g_failure);
   printf("Test Case 1 COMPLETED! Success: %d, Failure: %d\n\n", tcase_1_success, tcase_1_failure);
 
   printf ("Test Case 2: Player does not have enough cards on deck\n");
-  printf("Test 2a - cardEffect() correctly returns 0. Success: %d, Failure: %d\n", test_2a_success, test_2a_failure);
-  printf("Test 2b - cardEffect() correctly increases handCount of the player by 1 (drawn 2 cards and discarded adventurer). Success: %d, Failure: %d\n", test_2b_success, test_2b_failure);
-  printf("Test 2c - cardEffect() correctly places adventurer into the played pile. Success: %d, Failure: %d\n", test_2c_success, test_2c_failure);
+  printf("Test 2b - cardEffect() correctly increases handCount of the player by 2 (drawn 3 cards and discarded smithy). Success: %d, Failure: %d\n", test_2b_success, test_2b_failure);
+  printf("Test 2c - cardEffect() correctly places smithy into the played pile. Success: %d, Failure: %d\n", test_2c_success, test_2c_failure);
   printf("Test 2d - cardEffect() correctly increases playedCardCount by 1. Success: %d, Failure: %d\n", test_2d_success, test_2d_failure);
-  printf("Test 2e - cardEffect() correctly updates player's deckCount (equal old discardCount - 2). Success: %d, Failure: %d\n", test_2e_success, test_2e_failure);
+  printf("Test 2e - cardEffect() correctly updates player's deckCount (equal old discardCount - 3). Success: %d, Failure: %d\n", test_2e_success, test_2e_failure);
   printf("Test 2f - cardEffect() does not change other players' handCount and deckCount. Success: %d, Failure: %d\n", test_2f_success, test_2f_failure);
-  printf("Test 2g - cardEffect() correctly gives player 2 treasures card in hand. Success: %d, Failure: %d\n", test_2g_success, test_2g_failure);
   printf("Test Case 2 COMPLETED! Success: %d, Failure: %d\n\n", tcase_2_success, tcase_2_failure);
+    
+    
+
 
   return 0;
 }
