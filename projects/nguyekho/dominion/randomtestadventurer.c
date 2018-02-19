@@ -42,7 +42,7 @@ int main() {
   srand(time(NULL));
 
   int i;
-  int num_tests = 1000;
+  int num_tests = 100000;
 
   // to keep counts of success and failures
   int test_1a_success, test_1a_failure;
@@ -105,6 +105,7 @@ int main() {
   printf("Test 2g - cardEffect() correctly gives player 2 treasures card in hand. Success: %d, Failure: %d\n", test_2g_success, test_2g_failure);
   printf("Test Case 2 COMPLETED! Success: %d, Failure: %d\n\n", tcase_2_success, tcase_2_failure);
 
+  return 0;
 }
 
 int randomtestadventurer( int* test_1a_success, int* test_1a_failure,

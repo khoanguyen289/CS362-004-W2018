@@ -41,30 +41,42 @@ randomtestcard1: randomtestcard1.c dominion.o rngs.o
 randomtestcard2: randomtestcard2.c dominion.o rngs.o
 	gcc -o randomtestcard2 -g  randomtestcard2.c dominion.o rngs.o $(CFLAGS)
 
-unittestresults.out: dominion.o rngs.o randomtestadventurer randomtestcard1 randomtestcard2
-	echo '#######################################################################################' > unittestresults.out
-	./randomtestadventurer >> unittestresults.out
-	echo '#######################################################################################' >> unittestresults.out
-	./randomtestcard1 >> unittestresults.out
-	echo '#######################################################################################' >> unittestresults.out
-	./randomtestcard2 >> unittestresults.out
-	echo '#######################################################################################' >> unittestresults.out
-	echo "adventurerEffect() coverage" >> unittestresults.out
-	gcov -abcfu dominion.c | sed -n '/adventurerEffect/{n;p; n;p; n;p; n;p;}' >> unittestresults.out
-	echo '#######################################################################################' >> unittestresults.out
-	echo "smithyEffect() coverage" >> unittestresults.out
-	gcov -abcfu dominion.c | sed -n '/smithyEffect/{n;p; n;p; n;p; n;p;}' >> unittestresults.out
-	echo '#######################################################################################' >> unittestresults.out
-	echo "cardEffect() coverage" >> unittestresults.out
-	gcov -abcfu dominion.c | sed -n '/cardEffect/{n;p; n;p; n;p; n;p;}' >> unittestresults.out
-	echo '#######################################################################################' >> unittestresults.out
-	gcov -b dominion.c >> unittestresults.out
-	cat dominion.c.gcov >> unittestresults.out
-	echo '#######################################################################################' >> unittestresults.out
+randomtestadventurer.out: dominion.o rngs.o randomtestadventurer
+	echo '#######################################################################################' > randomtestadventurer.out
+	./randomtestadventurer >> randomtestadventurer.out
+	echo '#######################################################################################' >> randomtestadventurer.out
+	echo "adventurerEffect() coverage" >> randomtestadventurer.out
+	gcov -abcfu dominion.c | sed -n '/adventurerEffect/{n;p; n;p; n;p; n;p;}' >> randomtestadventurer.out
+	echo '#######################################################################################' >> randomtestadventurer.out
+	gcov -b dominion.c >> randomtestadventurer.out
+	cat dominion.c.gcov >> randomtestadventurer.out
+	echo '#######################################################################################' >> randomtestadventurer.out
+
+randomtestcard1.out: dominion.o rngs.o randomtestcard1
+	echo '#######################################################################################' >> randomtestcard1.out
+	./randomtestcard1 >> randomtestcard1.out
+	echo '#######################################################################################' >> randomtestcard1.out
+	echo "smithyEffect() coverage" >> randomtestcard1.out
+	gcov -abcfu dominion.c | sed -n '/smithyEffect/{n;p; n;p; n;p; n;p;}' >> randomtestcard1.out
+	echo '#######################################################################################' >> randomtestcard1.out
+	gcov -b dominion.c >> randomtestcard1.out
+	cat dominion.c.gcov >> randomtestcard1.out
+	echo '#######################################################################################' >> randomtestcard1.out
+
+randomtestcard2.out: dominion.o rngs.o randomtestcard2
+	echo '#######################################################################################' >> randomtestcard2.out
+	./randomtestcard2 >> randomtestcard2.out
+	echo '#######################################################################################' >> randomtestcard2.out
+	echo "cardEffect() coverage" >> randomtestcard2.out
+	gcov -abcfu dominion.c | sed -n '/cardEffect/{n;p; n;p; n;p; n;p;}' >> randomtestcard2.out
+	echo '#######################################################################################' >> randomtestcard2.out
+	gcov -b dominion.c >> randomtestcard2.out
+	cat dominion.c.gcov >> randomtestcard2.out
+	echo '#######################################################################################' >> randomtestcard2.out
 
 
-all: clean playdom player unittestresults.out
+all: clean playdom player randomtestcard1.out randomtestcard2.out randomtestadventurer.out
 
 clean:
 	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe
-	rm -f randomtestadventurer randomtestcard1 randomtestcard2 unittestresults.out
+	rm -f randomtestadventurer randomtestcard1 randomtestcard2 randomtestadventurer.out randomtestcard1.out randomtestcard2.out
