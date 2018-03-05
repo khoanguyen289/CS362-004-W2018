@@ -1,0 +1,36 @@
+Khoa Nguyen
+CS 362
+03/04/2018
+
+Bug Report
+
+Below are 3 bugs that were found when running my unit tests and random tests on my teammate's dominion code. Note that there may be more bugs in the implementation but only 3 are being reported here to satisfy the requirement of this assignment.
+*** adventurer_card: bug found on line 658 in dominion.c *** 
+
+The adventurer_card function has a bug when it is checking if a drawn card is a treasure card. Currently, it checks for if the drawn card is at the same time a copper, a silver, and a gold, which is impossible. This bug was found when the adventurer card unit test and random test were run and caused a segmentation fault. I believe the segmentation fault was caused because of the logical error as the number of drawn treasures were never incremented, making the player continuously draw cards until there was no more card to draw from the deck. Because of this segmentation fault, my unit test and random test for adventurer card could not execute all the way through. This is also why my Makefile doesn't run cardtest2.c and randomtestadventurer.c. However, as I used the debugging tool in Xcode to step through the lines on the function, it was quite easy to spot the logical error. Then I also attempted to change the operators to || instead of && to make the logics correct and ran my tests again which ran properly and did not result in segmentation fault anymore.
+
+Error on line 658: if (cardDrawn == copper && cardDrawn == silver && cardDrawn == gold)
+Should have been if (cardDrawn == copper || cardDrawn == silver || cardDrawn == gold)
+
+Below is a screenshot of my debugging in Xcode that found the segmentation fault: (see in Assignment-5.pdf)
+
+
+As you can see on the bottom left, the value of z is 14520 which exceeded the number of elements in temphand[] array (= MAX_HAND = 500) and that is the reason for the segmentation fault. This prompted me to check why z was incremented above 500 and when I looked on the if statement condition, it clearly didn't have correct logics for the check.
+
+*** smithy_card: bug found on line 713 in dominion.c *** 
+
+The smithy_card function has a bug that doesn't let the current player draw 3 card since the condition of the for loop is incorrect, essentially making the player unable to draw any card. This bug was found when the smithy card unit test and random test were run and my test printed "Test 1b - cardEffect() correctly increases handCount of the player by 2 (drawn 3 cards and discarded smithy). Result: FAILED." and "Test 1e - cardEffect() correctly decreases player's deckCount by 3. Result: FAILED."
+
+Error on line 713: for (i = 0; i < 0; i++)
+Should have been: for (i = 0; i < 3; i++)
+
+
+*** great_hall_card: bug found on line 750 in dominion.c ***
+
+The great_hall_card function has a bug that it doesn't properly increase the number of action by 1. The bug was due to the use of incorrect operator (-- instead of ++). This bug was found when the great_hall card unit test and random test were run and my test printed "Test 1g - cardEffect() correctly increases the number of actions by 1. Result: FAILED."
+
+Error on line 750: state->numActions--;
+Should have been: state->numActions++;
+
+
+Overall, all of the above bugs were not quite interesting as they all seemed to be simple typos and easy to spot by examining the source code. Also, I was able to just copy and paste my unit tests from assignment 3 and 4 over to test my teammate's code as the way he refactored the code was similar to what I did. The only thing I needed to change were the names of the refactored functions when I called them in my unit tests and random tests. Based on the ease of testing others' code, I think that my tests were quite maintainable.
